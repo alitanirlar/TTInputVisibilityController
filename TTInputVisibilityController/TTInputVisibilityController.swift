@@ -25,7 +25,7 @@ public class TTInputVisibilityController: NSObject {
     }
     
     /// you can add extra space between keyboard and toBeVisibleView
-    open var extraSpaceAboveKeyboard: CGFloat = 0
+    open var extraSpaceAboveKeyboard: CGFloat = 10
     /// instead of firstResponder view
     open var makeFirstRespondeSuperviewVisible: Bool = false
     
@@ -191,7 +191,7 @@ public extension UIView {
         static var viewExtension = "viewExtensionKeyboardVisibilityController"
     }
     
-    public var keyboardVisibilityController: TTInputVisibilityController? {
+    var keyboardVisibilityController: TTInputVisibilityController? {
         get {
             return objc_getAssociatedObject(self, &KeyboardAssociatedKey.viewExtension) as? TTInputVisibilityController ?? nil
         }
@@ -201,7 +201,7 @@ public extension UIView {
     }
     
     @discardableResult
-    public func addInputVisibilityController() -> TTInputVisibilityController {
+    func addInputVisibilityController() -> TTInputVisibilityController {
         var keyboardController = self.keyboardVisibilityController
         
         if keyboardController == nil {
@@ -220,14 +220,14 @@ public extension UIView {
         return keyboardVisibilityController!
     }
     
-    public func removeKeyboardVisibilityController() {
+    func removeKeyboardVisibilityController() {
         keyboardVisibilityController = nil
     }
 }
 
 public extension UIView {
     
-    public func findFirstResponder() -> UIView? {
+    func findFirstResponder() -> UIView? {
         if isFirstResponder {
             return self
         }
